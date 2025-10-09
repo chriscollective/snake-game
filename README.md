@@ -49,7 +49,7 @@
 
 ---
 
-🧭 學習重點（What I Learned）
+## 🧭 學習重點（What I Learned）
 
 掌握 Canvas API 基本繪圖與重繪概念
 
