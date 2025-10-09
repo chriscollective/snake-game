@@ -51,12 +51,12 @@
 
 ## 🧭 學習重點（What I Learned）
 
-掌握 Canvas API 基本繪圖與重繪概念
+- 掌握 Canvas API 基本繪圖與重繪概念
 
-使用 陣列管理遊戲物件狀態（snake 陣列）
+- 使用 陣列管理遊戲物件狀態（snake 陣列）
 
-學會 事件監聽與遊戲節奏控制（keydown + setInterval）
+- 學會 事件監聽與遊戲節奏控制（keydown + setInterval）
 
-應用 localStorage 儲存遊戲數據
+- 應用 localStorage 儲存遊戲數據
 
-熟悉 碰撞偵測與隨機生成邏輯
+- 熟悉 碰撞偵測與隨機生成邏輯
