@@ -37,3 +37,61 @@ body {
   display: block;
   margin-top: 15px;
 }
+
+.touch-controls {
+  display: none;
+}
+
+.touch-controls__btn {
+  touch-action: manipulation;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 9rem;
+  }
+
+  .touch-controls {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    grid-template-rows: repeat(2, 64px);
+    grid-template-areas:
+      ". up ."
+      "left down right";
+    gap: 0.75rem;
+    z-index: 10;
+  }
+
+  .touch-controls__btn {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 2px solid lightgreen;
+    color: lightgreen;
+    font-size: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .touch-controls__btn:active {
+    background-color: lightgreen;
+    color: black;
+  }
+
+  .touch-controls__btn--up {
+    grid-area: up;
+  }
+
+  .touch-controls__btn--left {
+    grid-area: left;
+  }
+
+  .touch-controls__btn--down {
+    grid-area: down;
+  }
+
+  .touch-controls__btn--right {
+    grid-area: right;
+  }
+}
