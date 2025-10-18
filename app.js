@@ -72,23 +72,78 @@ class Fruit {
 creatSnake();
 let myFruit = new Fruit();
 
-window.addEventListener("keydown", changeDirection);
 let derction = "Right";
-function changeDirection(e) {
-  if (e.key == "ArrowLeft" && derction != "Right") {
-    derction = "Left";
-  } else if (e.key == "ArrowUp" && derction != "Down") {
-    derction = "Up";
-  } else if (e.key == "ArrowRight" && derction != "Left") {
-    derction = "Right";
-  } else if (e.key == "ArrowDown" && derction != "Up") {
-    derction = "Down";
-  }
+const keyToDirection = {
+  ArrowLeft: "Left",
+  ArrowUp: "Up",
+  ArrowRight: "Right",
+  ArrowDown: "Down",
+};
+const oppositeDirection = {
+  Left: "Right",
+  Right: "Left",
+  Up: "Down",
+  Down: "Up",
+};
+let directionLock = false;
 
-  //每次按下方向鍵的時候，在下一偵畫面被畫出來之前
-  //不接受任何keydown事件
-  //可以防止連續按按鍵導致的蛇頭180度轉彎的自殺事件。
+function lockDirectionInputs() {
+  directionLock = true;
   window.removeEventListener("keydown", changeDirection);
+}
+
+function unlockDirectionInputs() {
+  if (!directionLock) {
+    return;
+  }
+  directionLock = false;
+  window.addEventListener("keydown", changeDirection);
+}
+
+function tryChangeDirection(nextDirection) {
+  if (!nextDirection || directionLock) {
+    return false;
+  }
+  if (oppositeDirection[nextDirection] === derction) {
+    return false;
+  }
+  derction = nextDirection;
+  lockDirectionInputs();
+  return true;
+}
+
+function changeDirection(e) {
+  const nextDirection = keyToDirection[e.key];
+  if (tryChangeDirection(nextDirection)) {
+    e.preventDefault();
+  }
+}
+
+window.addEventListener("keydown", changeDirection);
+
+const controlButtons = document.querySelectorAll(".touch-controls__btn");
+if (controlButtons.length > 0) {
+  const controlEvents = window.PointerEvent
+    ? ["pointerdown"]
+    : ["touchstart", "click"];
+
+  const handleControlInput = (event) => {
+    event.preventDefault();
+    const nextDirection = event.currentTarget.getAttribute("data-direction");
+    tryChangeDirection(nextDirection);
+  };
+
+  controlButtons.forEach((button) => {
+    controlEvents.forEach((eventName) => {
+      const options = eventName === "touchstart" ? { passive: false } : undefined;
+      button.addEventListener(eventName, handleControlInput, options);
+    });
+
+    // 在不支援 PointerEvent 時，確保點擊也能觸發
+    if (controlEvents.indexOf("click") === -1) {
+      button.addEventListener("click", handleControlInput);
+    }
+  });
 }
 
 let score = 0;
@@ -166,7 +221,7 @@ function draw() {
   }
 
   snake.unshift(newHead);
-  window.addEventListener("keydown", changeDirection);
+  unlockDirectionInputs();
 }
 
 let myGame = setInterval(draw, 57);

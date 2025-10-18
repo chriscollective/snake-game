@@ -13,11 +13,51 @@
       height="320"
       style="background-color: black"
     ></canvas>
-    <p id="myScore"></p>
-    <p id="myScore2"></p>
+    <div class="scoreboard">
+      <p id="myScore"></p>
+      <p id="myScore2"></p>
+    </div>
     <button type="button" id="Start" onclick="location.reload()">
       開始新遊戲
     </button>
+    <div
+      class="touch-controls"
+      role="group"
+      aria-label="觸控方向鍵"
+    >
+      <button
+        type="button"
+        class="touch-controls__btn touch-controls__btn--up"
+        data-direction="Up"
+        aria-label="向上"
+      >
+        &#9650;
+      </button>
+      <button
+        type="button"
+        class="touch-controls__btn touch-controls__btn--left"
+        data-direction="Left"
+        aria-label="向左"
+      >
+        &#9664;
+      </button>
+      <button
+        type="button"
+        class="touch-controls__btn touch-controls__btn--down"
+        data-direction="Down"
+        aria-label="向下"
+      >
+        &#9660;
+      </button>
+      <button
+        type="button"
+        class="touch-controls__btn touch-controls__btn--right"
+        data-direction="Right"
+        aria-label="向右"
+      >
+        &#9654;
+      </button>
+    </div>
   </body>
   <script src="app.js"></script>
 </html>
